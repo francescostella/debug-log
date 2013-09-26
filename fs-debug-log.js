@@ -7,16 +7,16 @@ Debug.log = function(elem) {
 	// To log use: Debug.log({ 'Label': varName });
 
 	for (var prop in elem)  {
-			Debug.messages[prop] = elem[prop];
+		Debug.messages[prop] = elem[prop];
 	}
 			
 	// Create output message    
 	var output = "";
 	
 	for (var prop in Debug.messages){
-			var line = "";
-			line = line + ("<b>" + prop + "</b>: " + Debug.messages[prop]);
-			output = output + line + "<br>";
+		var line = "";
+		line = line + ("<b>" + prop + "</b>: " + Debug.messages[prop]);
+		output = output + line + "<br>";
 	}
 	
 	// Creation of hud
@@ -42,7 +42,7 @@ Debug.log = function(elem) {
 				if(e.which == 68) {
 					e.preventDefault();
 					$('.debug-log-hud').slideToggle(400,function() {
-							isPressed = false;
+						isPressed = false;
 					});
 				}
 			}

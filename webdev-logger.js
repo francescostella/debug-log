@@ -3,14 +3,14 @@ var Debug = {};
 // Creation of 'message' obj
 Debug.messages = {};
 
-Debug.log = function(elem) { 
+Debug.log = function(elem) {
 	// To log use: Debug.log({ 'Label': varName });
 
 	for (var prop in elem)  {
 		Debug.messages[prop] = elem[prop];
 	}
 			
-	// Create output message    
+	// Create output message
 	var output = "";
 	
 	for (var prop in Debug.messages){
@@ -20,28 +20,36 @@ Debug.log = function(elem) {
 	}
 	
 	// Creation of hud
-	if(!($('.debug-log-hud').length > 0)) {
-		$('<div/>').addClass('debug-log-hud').css({
-			position: "fixed", 
-			bottom: "20px", 
-			right: "20px", 
-			color: "white", 
-			backgroundColor: "rgba(0,0,0,.75)", 
-			padding: "8px",
-			borderRadius: "3px",
-			webkitFontSmoothing: "antialiased",
-			zIndex: 99
-		}).appendTo('body');
+	if(!document.getElementById('debug-log-hud')) {
+		var element = document.createElement('div');
+		
+		element.id = 'debug-log-hud';
+		element.style.position = "fixed";
+		element.style.bottom = "20px";
+		element.style.right = "20px";
+		element.style.color = "white";
+		element.style.backgroundColor = "rgba(0,0,0,.75)";
+		element.style.padding = "8px";
+		element.style.borderRadius = "3px";
+		element.style.fontFamily = "Arial, sans-serif";
+		element.style.fontSize = "12px";
+		element.style.lineHeight = "1.3";
+		element.style.webkitFontSmoothing = "antialiased";
+		element.style.zIndex = 99;
+
+		var test = document.getElementById('test')
+		document.lastChild.appendChild(element);
 
 		// Bindings
 		var isPressed = false;
+
 		$(document).keydown(function(e) {
-					console.log('toggle');
+			console.log('toggle');
 			if(!isPressed) {
 				isPressed = true;
 				if(e.which == 68) {
 					e.preventDefault();
-					$('.debug-log-hud').slideToggle(400,function() {
+					$('#debug-log-hud').slideToggle(400,function() {
 						isPressed = false;
 					});
 				}
@@ -50,5 +58,5 @@ Debug.log = function(elem) {
 	}
 		
 	// Output
-	$(".debug-log-hud").html(output);
+	$("#debug-log-hud").html(output);
 };

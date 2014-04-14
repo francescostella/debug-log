@@ -3,17 +3,18 @@
 	<head>
 			<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<title>Test WebDev-logger</title>
+			<meta name="viewport" content="width=device-width, user-scalable=no">
+			<title>Demo - Devkit-js</title>
 	</head>
 	<body>
 		<div id="test"></div>
 	<script src="../js/vendor/jquery.min.js"></script>
 	<script src="../devkit.js"></script>		
 	<script>
-		jQuery(document).ready(function($) {
-			Debug.log({ 'Label01': 'varName01' });
-			Debug.log({ 'Label02': 'varName02' });
-			Debug.log({ 'Label03': 'varName03' });
+		document.addEventListener('DOMContentLoaded', function(){
+			Devkit.log({ 'Label01': 'varName01' });
+			Devkit.log({ 'Label02': 'varName02' });
+			Devkit.log({ 'Label03': 'varName03' });
 		});
 	</script>
 	</body>

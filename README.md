@@ -1,4 +1,4 @@
-WebDev-logger
+DevKit-js
 =========
 Javascript console HTML/JS interface to logging web development data, avoiding use the browser console, via console.log(). 
 

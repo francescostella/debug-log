@@ -96,11 +96,18 @@ Devkit.info = function () {
 		Devkit.log({ 'Event Type: ' : e.type });
 	};
 
-	Devkit.bindAll(Devkit.eventsList, eventsInfo)	
+	Devkit.addMultipleListener(Devkit.eventsList, eventsInfo)	
 };
 
-Devkit.bindAll = function (arrayEvents, callback) {
+/*
+ *	Helpers
+ */
+Devkit.addMultipleListener = function (arrayEvents, callback) {
 	for (var ev in arrayEvents) {
 		document.addEventListener(arrayEvents[ev], callback);
 	}
+};
+
+Devkit.dragger = function (element) {
+	element
 };

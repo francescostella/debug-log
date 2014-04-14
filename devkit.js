@@ -66,9 +66,7 @@ Devkit.createHud = function () {
 	element.style.webkitFontSmoothing = "antialiased";
 	element.style.zIndex = 99;
 
-	var test = document.getElementById('test')
 	document.lastChild.appendChild(element);
-
 	Devkit.bindings(element);
 };
 

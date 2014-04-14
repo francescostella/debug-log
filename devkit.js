@@ -9,8 +9,12 @@
 'use strict';
 
 var Devkit = Devkit || {};
+Devkit.eventsList = ['mousedown', 'mouseup', 'touchstart', 'touchend', 'touchmove'];
 Devkit.messages = {};
 
+/*
+ * Devkit Logger
+ */
 Devkit.log = function(elem) {
 	
 	for (var prop in elem)  {
@@ -35,10 +39,8 @@ Devkit.log = function(elem) {
 
 Devkit.bindings = function () {
 	document.onkeydown = function(e) {	
-		e.preventDefault();
-
 		if(e.which != 27) {
-			return false;
+			return; // Do not return false otherwise it will prevents browser's hotkeys
 		}
 
 		if (Devkit.devkitHud.style.display === 'none') {
@@ -70,3 +72,35 @@ Devkit.createHud = function () {
 	Devkit.bindings(element);
 };
 
+/*
+ * Devkit Viewport Info
+ */
+Devkit.info = function () {
+	window.onload =  function () {
+		viewportInfo();
+	};
+
+	window.onresize = function () {
+		viewportInfo();
+	};
+
+	var viewportInfo = function () {
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+
+		Devkit.log({ 'Document w: ' : width });
+		Devkit.log({ 'Document h: ' : height });
+	};
+
+	var eventsInfo = function (e) {
+		Devkit.log({ 'Event Type: ' : e.type });
+	};
+
+	Devkit.bindAll(Devkit.eventsList, eventsInfo)	
+};
+
+Devkit.bindAll = function (arrayEvents, callback) {
+	for (var ev in arrayEvents) {
+		document.addEventListener(arrayEvents[ev], callback);
+	}
+};

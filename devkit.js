@@ -11,6 +11,7 @@
 var Devkit = Devkit || {};
 Devkit.eventsList = ['mousedown', 'mouseup', 'touchstart', 'touchend', 'touchmove'];
 Devkit.messages = {};
+Devkit.isVisible = false;
 
 /*
  * Devkit Logger
@@ -32,21 +33,22 @@ Devkit.log = function(elem) {
 	if(!document.getElementById('devkit-hud')) { 
 		Devkit.createHud(); 
 		Devkit.devkitHud = document.getElementById('devkit-hud');
+		Devkit.hide();
 	}
 	
 	Devkit.devkitHud.innerHTML = output;
 };
 
 Devkit.bindings = function () {
-	document.onkeydown = function(e) {	
-		if(e.which != 27) {
-			return; // Do not return false otherwise it will prevents browser's hotkeys
-		}
+	var TILDE_KEYCODE = 192;
 
-		if (Devkit.devkitHud.style.display === 'none') {
-			Devkit.devkitHud.style.display = 'block';
-		} else {
-			Devkit.devkitHud.style.display = 'none';
+	document.onkeydown = function(event) {
+		var keyCode = event.keyCode || event.which;
+
+		switch (keyCode){
+			case TILDE_KEYCODE: 
+				Devkit.toggle();
+			break;
 		}
 	};
 };
@@ -72,6 +74,25 @@ Devkit.createHud = function () {
 	Devkit.bindings(element);
 };
 
+Devkit.toggle = function () {		
+	if(!Devkit.isVisible) {
+    Devkit.show();
+    return;
+  }
+
+  Devkit.hide();
+};
+
+Devkit.show = function () {
+	Devkit.devkitHud.style.display = 'block';
+	Devkit.isVisible = true;
+};
+
+Devkit.hide = function () {		
+	Devkit.devkitHud.style.display = 'none';
+	Devkit.isVisible = false;
+};
+
 /*
  * Devkit Viewport Info
  */
@@ -88,12 +109,12 @@ Devkit.info = function () {
 		var width = window.innerWidth;
 		var height = window.innerHeight;
 
-		Devkit.log({ 'Document w: ' : width });
-		Devkit.log({ 'Document h: ' : height });
+		Devkit.log({ 'window w: ' : width });
+		Devkit.log({ 'window h: ' : height });
 	};
 
 	var eventsInfo = function (e) {
-		Devkit.log({ 'Event Type: ' : e.type });
+		Devkit.log({ 'e.type: ' : e.type });
 	};
 
 	Devkit.addMultipleListener(Devkit.eventsList, eventsInfo)	

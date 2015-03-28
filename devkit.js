@@ -107,7 +107,3 @@ Devkit.addMultipleListener = function (arrayEvents, callback) {
 		document.addEventListener(arrayEvents[ev], callback);
 	}
 };
-
-Devkit.dragger = function (element) {
-	element
-};
